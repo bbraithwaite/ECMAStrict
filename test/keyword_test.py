@@ -1,6 +1,6 @@
 import unittest
 import utils
-from lexer import lexer
+from lexer.jslexer import lexer
 
 class KeywordTests(unittest.TestCase):
 
@@ -13,7 +13,6 @@ class KeywordTests(unittest.TestCase):
 
     # Identifier names and identifiers
     def test_identifier_first_chars_are_tokenised(self):
-
         chars = [
             'x',
             'X',
@@ -35,7 +34,6 @@ class KeywordTests(unittest.TestCase):
         self.assertEqual(token.type, 'IDENTIFIER')
 
     def test_keywords_are_tokenised(self):
-
         keywords = [
             'break',
             'case',
@@ -69,7 +67,6 @@ class KeywordTests(unittest.TestCase):
             utils.validate_keyword(self, lexer, k)
 
     def test_future_keywords_are_tokenised(self):
-
         future_keywords = [
             'class', 
             'enum', 
@@ -84,7 +81,6 @@ class KeywordTests(unittest.TestCase):
             utils.validate_keyword(self, lexer, k)
 
     def test_future_strict_keywords_are_tokenised(self):
-
         future_strict_keywords = [
             'implements', 
             'let', 

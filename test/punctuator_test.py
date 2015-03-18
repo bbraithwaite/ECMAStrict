@@ -1,6 +1,6 @@
 import unittest
 import utils
-from lexer import lexer
+from lexer.jslexer import lexer
 
 class PunctuatorTests(unittest.TestCase):
     def test_punctuators_are_tokenised(self):  
