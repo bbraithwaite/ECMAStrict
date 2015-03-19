@@ -34,6 +34,7 @@ class LiteralTest(unittest.TestCase):
             ('0.0', 'NUMBER'),
             ('-0.1', 'NUMBER'),
             ('+0.123', 'NUMBER')
+            #('.0', 'NUMBER'), add support for optional int literal
         ]
 
         for t in tokens:
