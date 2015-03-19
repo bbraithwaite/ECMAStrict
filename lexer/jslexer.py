@@ -1,23 +1,26 @@
 import ply.lex as lex 
-from tokens import *
+import re
+from identifiers import *
+from punctuators import *
+from literals import *
 
-punctuators = (
-    punctuators + 
+tokens = (
+    # identifiers
+    variable + 
+    keywords + 
+    future_keywords + 
+    future_strict_keywords + 
+    # punctuators
+    punctuators_symbols + 
     punctuators_assignment + 
     punctuators_arithmetic + 
     punctuators_bitwise + 
     punctuators_conditional + 
     punctuators_comparison + 
     punctuators_logical + 
-    div_punctuators
-)
-
-tokens = (
-    other + 
-    keywords + 
-    future_keywords + 
-    future_strict_keywords + 
-    punctuators
+    div_punctuators +
+    # literals
+    literal_keywords
 )
 
 def t_single_line_comment(t):
@@ -46,6 +49,20 @@ def t_IDENTIFIER(t):
     if v in future_strict_keywords:
         t.type = t.value.upper()
 
+    if v in literal_keywords:
+        t.type = t.value.upper()
+
+    return t
+
+def t_NUMBER(t):
+    r'(-|\+)?[0-9]+(\.[0-9]*)?'
+
+    # Octal literals not allowed in strict mode
+    if re.match('0[0-9]+', t.value):
+        t_error(t)
+        return None
+    
+    t.value = float(t.value)
     return t
 
 # punctuators
@@ -116,9 +133,9 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
 
-def t_error(t):
+def t_error(t):    
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)    
-
+   
 # Build the lexer
 lexer = lex.lex()

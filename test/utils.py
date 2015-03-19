@@ -1,4 +1,10 @@
 # TODO: temp place for shared assertion methods
+def validate_number(self, lexer, value, typeName):
+    lexer.input(value)
+    token = lexer.token()
+    self.assertEqual(token.value, float(value))
+    self.assertEqual(token.type, typeName)
+
 def validate_token(self, lexer, value, typeName):
     lexer.input(value)
     token = lexer.token()

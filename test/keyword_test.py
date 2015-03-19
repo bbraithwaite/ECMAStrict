@@ -23,10 +23,6 @@ class KeywordTests(unittest.TestCase):
         for c in chars:
             utils.validate_identifier_char(self, lexer, c)
 
-    def test_invalid_first_char_identifier_is_not_tokenised(self):
-        # identifiers can contain numbers, but not as the first char
-        utils.invalid_first_identifier_char(self, lexer, '1');
-
     def test_non_reserved_word_identifiers(self):
         lexer.input('variable1')
         token = lexer.token()
