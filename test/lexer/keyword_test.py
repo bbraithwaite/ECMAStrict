@@ -1,6 +1,9 @@
+import ply.lex as lex
 import unittest
 import utils
-from lexer.jslexer import lexer
+import lexer.jslexer
+
+lexer = lex.lex(module=lexer.jslexer)
 
 class KeywordTests(unittest.TestCase):
 
@@ -91,6 +94,3 @@ class KeywordTests(unittest.TestCase):
 
         for k in future_strict_keywords:
             utils.validate_keyword(self, lexer, k)
-
-if __name__ == '__main__':
-    unittest.main()

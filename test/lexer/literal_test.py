@@ -1,6 +1,9 @@
 import unittest
 import utils
-from lexer.jslexer import lexer
+import ply.lex as lex
+import lexer.jslexer
+
+lexer = lex.lex(module=lexer.jslexer)
 
 class LiteralTest(unittest.TestCase):
     def test_null_literal(self):
@@ -51,4 +54,3 @@ class LiteralTest(unittest.TestCase):
         token = lexer.token()
         self.assertEqual(token.value, 'foo bar')
         self.assertEqual(token.type, 'STRING')
-

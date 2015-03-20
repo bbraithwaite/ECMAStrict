@@ -1,0 +1,232 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NOTEQUALV
+    VOID
+    LBRACKET
+    PROTECTED
+    MULTIPLY
+    WITH
+    MINUS
+    RPAREN
+    PLUS
+    IMPORT
+    ANDAND
+    GT
+    MODULO
+    LOGRSHIFT
+    ENUM
+    EXTENDS
+    VAR
+    LOGRSHIFTEQUAL
+    THIS
+    MINUSEQUAL
+    TYPEOF
+    INTERFACE
+    OR
+    DELETE
+    OROR
+    RETURN
+    RSHIFTEQUAL
+    STATIC
+    STRING
+    TRUE
+    PLUSPLUS
+    COLON
+    FUNCTION
+    FOR
+    EQUALV
+    ELSE
+    TRY
+    ANDEQUAL
+    INSTANCEOF
+    LBRACE
+    CONTINUE
+    NOT
+    OREQUAL
+    RSHIFT
+    DEFAULT
+    WHILE
+    NEW
+    DOT
+    CASE
+    SEMICOLON
+    SWITCH
+    CATCH
+    NOTEQUALVT
+    AND
+    GTE
+    PACKAGE
+    NUMBER
+    PLUSEQUAL
+    LTE
+    IMPLEMENTS
+    FALSE
+    BREAK
+    LET
+    MULTIPLYEQUAL
+    BWNOT
+    PUBLIC
+    DO
+    CONST
+    TERNARY
+    FSLASH
+    EQUAL
+    EXPORT
+    LSHIFT
+    NULL
+    RBRACE
+    PRIVATE
+    LT
+    COMMA
+    EQUALVT
+    CLASS
+    XOR
+    MODULOEQUAL
+    YIELD
+    FINALLY
+    LPAREN
+    IN
+    MINUSMINUS
+    IF
+    XOREQUAL
+    LSHIFTEQUAL
+    FSLASHEQUAL
+    RBRACKET
+    SUPER
+    THROW
+    DEBUGGER
+
+Grammar
+
+Rule 0     S' -> exp
+Rule 1     exp -> IDENTIFIER
+
+Terminals, with rules where they appear
+
+AND                  : 
+ANDAND               : 
+ANDEQUAL             : 
+BREAK                : 
+BWNOT                : 
+CASE                 : 
+CATCH                : 
+CLASS                : 
+COLON                : 
+COMMA                : 
+CONST                : 
+CONTINUE             : 
+DEBUGGER             : 
+DEFAULT              : 
+DELETE               : 
+DO                   : 
+DOT                  : 
+ELSE                 : 
+ENUM                 : 
+EQUAL                : 
+EQUALV               : 
+EQUALVT              : 
+EXPORT               : 
+EXTENDS              : 
+FALSE                : 
+FINALLY              : 
+FOR                  : 
+FSLASH               : 
+FSLASHEQUAL          : 
+FUNCTION             : 
+GT                   : 
+GTE                  : 
+IDENTIFIER           : 1
+IF                   : 
+IMPLEMENTS           : 
+IMPORT               : 
+IN                   : 
+INSTANCEOF           : 
+INTERFACE            : 
+LBRACE               : 
+LBRACKET             : 
+LET                  : 
+LOGRSHIFT            : 
+LOGRSHIFTEQUAL       : 
+LPAREN               : 
+LSHIFT               : 
+LSHIFTEQUAL          : 
+LT                   : 
+LTE                  : 
+MINUS                : 
+MINUSEQUAL           : 
+MINUSMINUS           : 
+MODULO               : 
+MODULOEQUAL          : 
+MULTIPLY             : 
+MULTIPLYEQUAL        : 
+NEW                  : 
+NOT                  : 
+NOTEQUALV            : 
+NOTEQUALVT           : 
+NULL                 : 
+NUMBER               : 
+OR                   : 
+OREQUAL              : 
+OROR                 : 
+PACKAGE              : 
+PLUS                 : 
+PLUSEQUAL            : 
+PLUSPLUS             : 
+PRIVATE              : 
+PROTECTED            : 
+PUBLIC               : 
+RBRACE               : 
+RBRACKET             : 
+RETURN               : 
+RPAREN               : 
+RSHIFT               : 
+RSHIFTEQUAL          : 
+SEMICOLON            : 
+STATIC               : 
+STRING               : 
+SUPER                : 
+SWITCH               : 
+TERNARY              : 
+THIS                 : 
+THROW                : 
+TRUE                 : 
+TRY                  : 
+TYPEOF               : 
+VAR                  : 
+VOID                 : 
+WHILE                : 
+WITH                 : 
+XOR                  : 
+XOREQUAL             : 
+YIELD                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+exp                  : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . exp
+    (1) exp -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 1
+
+    exp                            shift and go to state 2
+
+state 1
+
+    (1) exp -> IDENTIFIER .
+
+    $end            reduce using rule 1 (exp -> IDENTIFIER .)
+
+
+state 2
+
+    (0) S' -> exp .
+
+

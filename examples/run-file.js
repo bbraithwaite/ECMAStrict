@@ -1,1 +1,1 @@
-'bar'
+var foo = 1;
