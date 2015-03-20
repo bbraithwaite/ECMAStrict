@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Ply debug files
+*.out
+
 # C extensions
 *.so
 
