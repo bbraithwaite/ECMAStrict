@@ -39,3 +39,16 @@ class LiteralTest(unittest.TestCase):
 
         for t in tokens:
             utils.validate_number(self, lexer, t[0], t[1])
+
+    def test_empty_string_literal(self):
+        lexer.input("''")
+        token = lexer.token()
+        self.assertEqual(token.value, '')
+        self.assertEqual(token.type, 'STRING')
+
+    def test_simple_string_literal(self):
+        lexer.input("'foo bar'")
+        token = lexer.token()
+        self.assertEqual(token.value, 'foo bar')
+        self.assertEqual(token.type, 'STRING')
+

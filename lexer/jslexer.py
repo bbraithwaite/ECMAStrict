@@ -65,6 +65,12 @@ def t_NUMBER(t):
     t.value = float(t.value)
     return t
 
+def t_STRING(t):
+    # String literals must use single quotes in this lexer.
+    r"'(.)*'"
+    t.value = t.value[1:-1] # remove the encasing quotes
+    return t
+
 # punctuators
 t_LBRACE        = r'{'
 t_RBRACE        = r'}'

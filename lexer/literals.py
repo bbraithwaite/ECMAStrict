@@ -8,5 +8,6 @@ literal_keywords = (
     'TRUE',             # true
     # The value of the Boolean literal false is a value of the Boolean type, namely false.
     'FALSE',            # false
-    'NUMBER'
+    'NUMBER',
+    'STRING'
 )
