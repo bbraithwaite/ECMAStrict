@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'X\xc1\xcb\r|\x80\x19\xbc\xea \x00\xb9p\x14G\xac'
+_lr_signature = '\x80\x97\xac\xf5\xa2ie\xb8E\x05*UF7\xa54'
     
-_lr_action_items = {'IDENTIFIER':([0,],[1,]),'$end':([1,2,],[-1,0,]),}
+_lr_action_items = {'FALSE':([6,],[7,]),'STRING':([6,],[8,]),'SEMICOLON':([7,8,9,10,11,12,],[-8,-5,-4,13,-6,-7,]),'EQUAL':([5,],[6,]),'NUMBER':([6,],[9,]),'VAR':([0,1,13,],[3,3,-3,]),'IDENTIFIER':([3,6,],[5,11,]),'TRUE':([6,],[12,]),'$end':([0,1,2,4,13,],[-2,-2,0,-1,-3,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'exp':([0,],[2,]),}
+_lr_goto_items = {'exp':([6,],[10,]),'statement':([0,1,],[1,1,]),'js':([0,1,],[2,4,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -25,6 +25,13 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> exp","S'",1,None,None,None),
-  ('exp -> IDENTIFIER','exp',1,'p_exp_indentifier','parser/jsparser.py',7),
+  ("S' -> js","S'",1,None,None,None),
+  ('js -> statement js','js',2,'p_js','parser/jsparser.py',6),
+  ('js -> <empty>','js',0,'p_js_empty','parser/jsparser.py',10),
+  ('statement -> VAR IDENTIFIER EQUAL exp SEMICOLON','statement',5,'p_statement_assign','parser/jsparser.py',14),
+  ('exp -> NUMBER','exp',1,'p_exp_number','parser/jsparser.py',18),
+  ('exp -> STRING','exp',1,'p_exp_string','parser/jsparser.py',22),
+  ('exp -> IDENTIFIER','exp',1,'p_exp_identifier','parser/jsparser.py',26),
+  ('exp -> TRUE','exp',1,'p_exp_true','parser/jsparser.py',30),
+  ('exp -> FALSE','exp',1,'p_exp_false','parser/jsparser.py',34),
 ]
