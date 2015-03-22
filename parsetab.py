@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '\x80\x97\xac\xf5\xa2ie\xb8E\x05*UF7\xa54'
+_lr_signature = '\x10\xe0{\xbdx\x99fE2\xc6\x9eP\xbc\xbc\xde\x13'
     
-_lr_action_items = {'FALSE':([6,],[7,]),'STRING':([6,],[8,]),'SEMICOLON':([7,8,9,10,11,12,],[-8,-5,-4,13,-6,-7,]),'EQUAL':([5,],[6,]),'NUMBER':([6,],[9,]),'VAR':([0,1,13,],[3,3,-3,]),'IDENTIFIER':([3,6,],[5,11,]),'TRUE':([6,],[12,]),'$end':([0,1,2,4,13,],[-2,-2,0,-1,-3,]),}
+_lr_action_items = {'FALSE':([7,8,],[9,9,]),'STRING':([7,8,],[10,10,]),'SEMICOLON':([9,10,11,12,13,14,15,],[-9,-6,-5,16,-7,-8,17,]),'EQUAL':([4,6,],[7,8,]),'NUMBER':([7,8,],[11,11,]),'VAR':([0,1,16,17,],[3,3,-4,-3,]),'IDENTIFIER':([0,1,3,7,8,16,17,],[4,4,6,13,13,-4,-3,]),'TRUE':([7,8,],[14,14,]),'$end':([0,1,2,5,16,17,],[-2,-2,0,-1,-4,-3,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'exp':([6,],[10,]),'statement':([0,1,],[1,1,]),'js':([0,1,],[2,4,]),}
+_lr_goto_items = {'exp':([7,8,],[12,15,]),'statement':([0,1,],[1,1,]),'js':([0,1,],[2,5,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -28,10 +28,11 @@ _lr_productions = [
   ("S' -> js","S'",1,None,None,None),
   ('js -> statement js','js',2,'p_js','parser/jsparser.py',6),
   ('js -> <empty>','js',0,'p_js_empty','parser/jsparser.py',10),
-  ('statement -> VAR IDENTIFIER EQUAL exp SEMICOLON','statement',5,'p_statement_assign','parser/jsparser.py',14),
-  ('exp -> NUMBER','exp',1,'p_exp_number','parser/jsparser.py',18),
-  ('exp -> STRING','exp',1,'p_exp_string','parser/jsparser.py',22),
-  ('exp -> IDENTIFIER','exp',1,'p_exp_identifier','parser/jsparser.py',26),
-  ('exp -> TRUE','exp',1,'p_exp_true','parser/jsparser.py',30),
-  ('exp -> FALSE','exp',1,'p_exp_false','parser/jsparser.py',34),
+  ('statement -> VAR IDENTIFIER EQUAL exp SEMICOLON','statement',5,'p_statement_var','parser/jsparser.py',14),
+  ('statement -> IDENTIFIER EQUAL exp SEMICOLON','statement',4,'p_statement_assign','parser/jsparser.py',18),
+  ('exp -> NUMBER','exp',1,'p_exp_number','parser/jsparser.py',22),
+  ('exp -> STRING','exp',1,'p_exp_string','parser/jsparser.py',26),
+  ('exp -> IDENTIFIER','exp',1,'p_exp_identifier','parser/jsparser.py',30),
+  ('exp -> TRUE','exp',1,'p_exp_true','parser/jsparser.py',34),
+  ('exp -> FALSE','exp',1,'p_exp_false','parser/jsparser.py',38),
 ]

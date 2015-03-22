@@ -10,9 +10,13 @@ def p_js_empty(p):
     'js : '
     p[0] = [ ]
 
-def p_statement_assign(p):
+def p_statement_var(p):
     'statement : VAR IDENTIFIER EQUAL exp SEMICOLON'
     p[0] = ('var', p[2], p[4])
+
+def p_statement_assign(p):
+    'statement : IDENTIFIER EQUAL exp SEMICOLON'
+    p[0] = ('assign', p[1], p[3])
 
 def p_exp_number(p): 
     'exp : NUMBER'
