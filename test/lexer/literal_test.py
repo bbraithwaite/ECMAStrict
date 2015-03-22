@@ -53,7 +53,8 @@ class LiteralTest(unittest.TestCase):
             ('0xe', 'NUMBER', 14),
             ('0xf', 'NUMBER', 15),
             ('0x10', 'NUMBER', 16),
-            ('0x10a', 'NUMBER', 266)
+            ('0x10a', 'NUMBER', 266),
+            ('0xDEADBEEF', 'NUMBER', 3735928559)
         ]
 
         utils.assertTokenList(self, lexer, tokens)
