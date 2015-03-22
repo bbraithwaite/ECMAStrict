@@ -1,23 +1,17 @@
 # TODO: temp place for shared assertion methods
-def validate_number(self, lexer, value, typeName):
-    lexer.input(value)
-    token = lexer.token()
-    self.assertEqual(token.value, float(value))
-    self.assertEqual(token.type, typeName)
 
-def validate_token(self, lexer, value, typeName):
-    lexer.input(value)
-    token = lexer.token()
-    self.assertEqual(token.value, value)
-    self.assertEqual(token.type, typeName)
-
-def validate_identifier_char(self, lexer, value):
-    validate_token(self, lexer, value, 'IDENTIFIER')
-
-def invalid_first_identifier_char(self, lexer, input):
+def validate_token_and_value(self, lexer, input, expectedType, expectedValue):
     lexer.input(input)
     token = lexer.token()
-    self.assertIsNone(token)
+    self.assertEqual(token.type, expectedType)
+    self.assertEqual(token.value, expectedValue)
 
-def validate_keyword(self, lexer, keyword):
-    validate_token(self, lexer, keyword, keyword.upper())
+def validate_token(self, lexer, input, expectedType):
+    validate_token_and_value(self, lexer, input, expectedType, input)
+
+def assertTokenList(self, lexer, tokens):
+    for t in tokens:
+        if len(t) == 3:
+            validate_token_and_value(self, lexer, t[0], t[1], t[2])
+        else:
+            validate_token(self, lexer, t[0], t[1])

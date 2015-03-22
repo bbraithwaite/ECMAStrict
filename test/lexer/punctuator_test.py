@@ -19,8 +19,7 @@ class PunctuatorTests(unittest.TestCase):
             (',', 'COMMA')
         ]
 
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
        
     def test_comparison_punctuators_are_tokenised(self):
         tokens = [
@@ -34,8 +33,7 @@ class PunctuatorTests(unittest.TestCase):
             ('!==', 'NOTEQUALVT')
         ]
 
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
     
     def test_arithmetic_punctuators_are_tokenised(self):
         tokens = [
@@ -47,8 +45,7 @@ class PunctuatorTests(unittest.TestCase):
             ('--', 'MINUSMINUS')
         ]
 
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_bitwise_punctuators_are_tokenised(self):
         tokens = [
@@ -61,8 +58,7 @@ class PunctuatorTests(unittest.TestCase):
             ('~', 'BWNOT')
         ]
 
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_logical_punctuators_are_tokenised(self):
         tokens = [
@@ -73,8 +69,7 @@ class PunctuatorTests(unittest.TestCase):
             (':', 'COLON')
         ]
 
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_assignment_punctuators_are_tokenised(self):
         tokens = [
@@ -91,8 +86,7 @@ class PunctuatorTests(unittest.TestCase):
             ('^=', 'XOREQUAL')
         ]
 
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_div_punctuators_are_tokenised(self):
         tokens = [
@@ -100,5 +94,4 @@ class PunctuatorTests(unittest.TestCase):
             ('/=', 'FSLASHEQUAL')
         ]
         
-        for t in tokens:
-            utils.validate_token(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)

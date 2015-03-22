@@ -7,90 +7,81 @@ lexer = lex.lex(module=lexer.jslexer)
 
 class KeywordTests(unittest.TestCase):
 
-    # Comments
     def test_single_line_comment_is_ignored(self):
         lexer.input('// this is a comment')
         token = lexer.token()
         self.assertEqual(lexer.lineno, 1)
         self.assertIsNone(token)
 
-    # Identifier names and identifiers
     def test_identifier_first_chars_are_tokenised(self):
-        chars = [
-            'x',
-            'X',
-            '$',
-            '_'
+        tokens = [
+            ('x', 'IDENTIFIER'),
+            ('X', 'IDENTIFIER'),
+            ('$', 'IDENTIFIER'),
+            ('_', 'IDENTIFIER')
         ]
 
-        for c in chars:
-            utils.validate_identifier_char(self, lexer, c)
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_non_reserved_word_identifiers(self):
-        lexer.input('variable1')
-        token = lexer.token()
-        self.assertEqual(token.value, 'variable1')
-        self.assertEqual(token.type, 'IDENTIFIER')
+        utils.validate_token(self, lexer, 'variable1', 'IDENTIFIER')
 
     def test_keywords_are_tokenised(self):
-        keywords = [
-            'break',
-            'case',
-            'catch',
-            'continue',
-            'debugger',
-            'default',
-            'delete',
-            'do',
-            'else',
-            'finally',
-            'for',
-            'function',
-            'if',
-            'in',
-            'instanceof', 
-            'typeof', 
-            'new', 
-            'return',
-            'var',
-            'void', 
-            'switch', 
-            'while', 
-            'this', 
-            'with', 
-            'throw',
-            'try'
+        tokens = [
+            ('break', 'BREAK'),
+            ('case', 'CASE'),
+            ('catch', 'CATCH'),
+            ('continue', 'CONTINUE'),
+            ('debugger', 'DEBUGGER'),
+            ('default', 'DEFAULT'),
+            ('delete', 'DELETE'),
+            ('do', 'DO'),
+            ('else', 'ELSE'),
+            ('finally', 'FINALLY'),
+            ('for', 'FOR'),
+            ('function', 'FUNCTION'),
+            ('if', 'IF'),
+            ('in', 'IN'),
+            ('instanceof', 'INSTANCEOF'), 
+            ('typeof', 'TYPEOF'),
+            ('new', 'NEW'),
+            ('return', 'RETURN'),
+            ('var', 'VAR'),
+            ('void', 'VOID'),
+            ('switch', 'SWITCH'),
+            ('while', 'WHILE'),
+            ('this', 'THIS'),
+            ('with', 'WITH'),
+            ('throw', 'THROW'),
+            ('try', 'TRY')
         ]
 
-        for k in keywords:
-            utils.validate_keyword(self, lexer, k)
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_future_keywords_are_tokenised(self):
-        future_keywords = [
-            'class', 
-            'enum', 
-            'extends', 
-            'super',
-            'const',
-            'export',
-            'import'
+        tokens = [
+            ('class', 'CLASS'),
+            ('enum',  'ENUM'),
+            ('extends', 'EXTENDS'),
+            ('super', 'SUPER'),
+            ('const', 'CONST'),
+            ('export', 'EXPORT'),
+            ('import', 'IMPORT')
         ]
 
-        for k in future_keywords:
-            utils.validate_keyword(self, lexer, k)
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_future_strict_keywords_are_tokenised(self):
-        future_strict_keywords = [
-            'implements', 
-            'let', 
-            'private',
-            'public',
-            'yield',
-            'interface',
-            'package',
-            'protected',
-            'static'    
+        tokens = [
+            ('implements', 'IMPLEMENTS'),
+            ('let', 'LET'),
+            ('private', 'PRIVATE'),
+            ('public', 'PUBLIC'),
+            ('yield', 'YIELD'),
+            ('interface', 'INTERFACE'),
+            ('package', 'PACKAGE'),
+            ('protected', 'PROTECTED'),
+            ('static', 'STATIC')
         ]
 
-        for k in future_strict_keywords:
-            utils.validate_keyword(self, lexer, k)
+        utils.assertTokenList(self, lexer, tokens)

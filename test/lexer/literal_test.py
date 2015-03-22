@@ -17,16 +17,15 @@ class LiteralTest(unittest.TestCase):
 
     def test_integer_numeric_literal(self):
         tokens = [
-            ('0', 'NUMBER'),
-            ('1', 'NUMBER'),
-            ('90', 'NUMBER'),
-            ('-0', 'NUMBER'),
-            ('-1', 'NUMBER'),
-            ('+1', 'NUMBER')
+            ('0', 'NUMBER', 0),
+            ('1', 'NUMBER', 1),
+            ('90', 'NUMBER', 90),
+            ('-0', 'NUMBER', 0),
+            ('-1', 'NUMBER', -1),
+            ('+1', 'NUMBER', 1)
         ]
 
-        for t in tokens:
-            utils.validate_number(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_integer_sequnce_cannot_start_with_zero_numeric_literal(self):
         lexer.input('01')
@@ -34,14 +33,13 @@ class LiteralTest(unittest.TestCase):
 
     def test_decimal_numeric_literal(self):
         tokens = [
-            ('0.0', 'NUMBER'),
-            ('-0.1', 'NUMBER'),
-            ('+0.123', 'NUMBER')
+            ('0.0', 'NUMBER', 0),
+            ('-0.1', 'NUMBER', -0.1),
+            ('+0.123', 'NUMBER', 0.123)
             #('.0', 'NUMBER'), add support for optional int literal
         ]
 
-        for t in tokens:
-            utils.validate_number(self, lexer, t[0], t[1])
+        utils.assertTokenList(self, lexer, tokens)
 
     def test_hex_numeric_literal(self):
         tokens = [
@@ -58,21 +56,11 @@ class LiteralTest(unittest.TestCase):
             ('0x10a', 'NUMBER', 266)
         ]
 
-        for t in tokens:
-            lexer.input(t[0])
-            token = lexer.token()
-            self.assertEqual(token.value, t[2])
-            self.assertEqual(token.type, 'NUMBER')
+        utils.assertTokenList(self, lexer, tokens)
 
 
-    def test_empty_string_literal(self):
-        lexer.input("''")
-        token = lexer.token()
-        self.assertEqual(token.value, '')
-        self.assertEqual(token.type, 'STRING')
+    def test_empty_string_literal(self):    
+        utils.validate_token_and_value(self, lexer, "''", 'STRING', '')
 
     def test_simple_string_literal(self):
-        lexer.input("'foo bar'")
-        token = lexer.token()
-        self.assertEqual(token.value, 'foo bar')
-        self.assertEqual(token.type, 'STRING')
+        utils.validate_token_and_value(self, lexer, "'foo bar'", 'STRING', 'foo bar')

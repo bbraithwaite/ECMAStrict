@@ -78,18 +78,17 @@ def t_NUMBER_hex(t):
     t.value = mv
     return t
 
-def t_NUMBER(t):
+def t_NUMBER_decimal(t):
     r'(-|\+)?[0-9]+(\.[0-9]*)?'
 
     # Octal literals not allowed in strict mode
     if re.match('0[0-9]+', t.value):
         t_error(t)
         return None
-    
+
+    t.type = 'NUMBER'    
     t.value = float(t.value)
     return t
-
-
 
 def t_STRING(t):
     # String literals must use single quotes in this lexer.
