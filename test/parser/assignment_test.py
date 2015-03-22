@@ -8,7 +8,7 @@ import ply.lex as lex
 lexer = lex.lex(module=lexer.jslexer)
 parser = yacc.yacc(module=parser.jsparser)
 
-class FirstTest(unittest.TestCase):
+class AssigmentTest(unittest.TestCase):
     def test_variable_number_assignment(self):
         parse_tree = parser.parse("var foo = 1;", lexer=lexer)
         self.assertEquals(parse_tree, [('var', 'foo', ('number', 1.0))])
