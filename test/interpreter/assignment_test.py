@@ -31,4 +31,3 @@ class AssignmentTest(unittest.TestCase):
         ]
         env = interpreter.interpret(parse_tree)
         self.assertEquals(env, { 'foo' : 2, 'bar' : 2})
-        

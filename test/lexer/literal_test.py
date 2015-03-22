@@ -43,6 +43,28 @@ class LiteralTest(unittest.TestCase):
         for t in tokens:
             utils.validate_number(self, lexer, t[0], t[1])
 
+    def test_hex_numeric_literal(self):
+        tokens = [
+            ('0x1', 'NUMBER', 1.0),
+            ('0X2', 'NUMBER', 2.0),
+            ('0xa', 'NUMBER', 10),
+            ('0xa', 'NUMBER', 10),
+            ('0xb', 'NUMBER', 11),
+            ('0xc', 'NUMBER', 12),
+            ('0xd', 'NUMBER', 13),
+            ('0xe', 'NUMBER', 14),
+            ('0xf', 'NUMBER', 15),
+            ('0x10', 'NUMBER', 16),
+            ('0x10a', 'NUMBER', 266)
+        ]
+
+        for t in tokens:
+            lexer.input(t[0])
+            token = lexer.token()
+            self.assertEqual(token.value, t[2])
+            self.assertEqual(token.type, 'NUMBER')
+
+
     def test_empty_string_literal(self):
         lexer.input("''")
         token = lexer.token()

@@ -54,6 +54,30 @@ def t_IDENTIFIER(t):
 
     return t
 
+def t_NUMBER_hex(t):
+    r'0[x|X][0-9a-fA-F]+'
+    t.type = 'NUMBER'
+    mv = 0 # mathematical value
+    for hex_digit in t.value[2:]:
+        mv = mv * 16
+        if hex_digit.isdigit():
+            mv += int(hex_digit)
+        elif hex_digit.upper() == 'A':
+            mv += 10
+        elif hex_digit.upper() == 'B':
+            mv += 11
+        elif hex_digit.upper() == 'C':
+            mv += 12
+        elif hex_digit.upper() == 'D':
+            mv += 13
+        elif hex_digit.upper() == 'E':
+            mv += 14
+        elif hex_digit.upper() == 'F':
+            mv += 15
+
+    t.value = mv
+    return t
+
 def t_NUMBER(t):
     r'(-|\+)?[0-9]+(\.[0-9]*)?'
 
@@ -64,6 +88,8 @@ def t_NUMBER(t):
     
     t.value = float(t.value)
     return t
+
+
 
 def t_STRING(t):
     # String literals must use single quotes in this lexer.
