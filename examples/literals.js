@@ -1,4 +1,4 @@
-
+'use strict';
 
 // Playground for checking JS Grammar with node.
 
@@ -75,7 +75,7 @@ console.log(exp4);
 console.log(exp5);
 
 
-console.log(051);
+
 
 
 console.log('* DecimalIntegerLiteral');
@@ -91,9 +91,6 @@ var decLitNotZeroWithOpt = 1012; // DecimalDigits(0-9)*
 console.log(decLitZero);
 console.log(decLitNotZero);
 console.log(decLitNotZeroWithOpt);
-
-
-
 
 
 console.log('-- hex ---');
@@ -116,3 +113,8 @@ console.log(hexExamplex);
 console.log(hexExampleX);
 console.log(hexExampleA);
 console.log(hexExamplea);
+
+//console.log('-- octal ---');
+//console.log(051); octal literal example
+console.log('-- exp ---');
+console.log(1e1);

@@ -1,8 +1,7 @@
-import ply.lex as lex 
-import re
 from identifiers import *
 from punctuators import *
 from literals import *
+from jsnumbers import *
 
 tokens = (
     # identifiers
@@ -52,42 +51,6 @@ def t_IDENTIFIER(t):
     if v in literal_keywords:
         t.type = t.value.upper()
 
-    return t
-
-def t_NUMBER_hex(t):
-    r'0[x|X][0-9a-fA-F]+'
-    t.type = 'NUMBER'
-    mv = 0 # mathematical value
-    for hex_digit in t.value[2:]:
-        mv = mv * 16
-        if hex_digit.isdigit():
-            mv += int(hex_digit)
-        elif hex_digit.upper() == 'A':
-            mv += 10
-        elif hex_digit.upper() == 'B':
-            mv += 11
-        elif hex_digit.upper() == 'C':
-            mv += 12
-        elif hex_digit.upper() == 'D':
-            mv += 13
-        elif hex_digit.upper() == 'E':
-            mv += 14
-        elif hex_digit.upper() == 'F':
-            mv += 15
-
-    t.value = mv
-    return t
-
-def t_NUMBER_decimal(t):
-    r'(-|\+)?[0-9]+(\.[0-9]*)?'
-
-    # Octal literals not allowed in strict mode
-    if re.match('0[0-9]+', t.value):
-        t_error(t)
-        return None
-
-    t.type = 'NUMBER'    
-    t.value = float(t.value)
     return t
 
 def t_STRING(t):

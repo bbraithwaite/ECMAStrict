@@ -15,3 +15,9 @@ def assertTokenList(self, lexer, tokens):
             validate_token_and_value(self, lexer, t[0], t[1], t[2])
         else:
             validate_token(self, lexer, t[0], t[1])
+
+def assertTokensAreNone(self, lexer, tokens):
+    for t in tokens:
+        lexer.input(t)
+        token = lexer.token()
+        self.assertIsNone(token)
