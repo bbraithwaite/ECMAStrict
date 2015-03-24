@@ -38,7 +38,8 @@ keywords = (
 )
 
 #
-# The following words are used as keywords in proposed extensions and are therefore reserved to allow for the possibility of future adoption of those extensions. 
+# The following words are used as keywords in proposed extensions and are therefore reserved to allow for 
+# the possibility of future adoption of those extensions. 
 #
 future_keywords = (
     'CLASS',            # class

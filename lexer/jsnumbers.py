@@ -43,11 +43,21 @@ def t_NUMBER_hex_integer_literal(t):
 decimal_digit_re            = r'[0-9]'
 decimal_digits_re           = r'[0-9]+'
 non_zero_digit_re           = r'[1-9]'
-decimal_integer_literal_re  = '0|({NonZeroDigit}{DecimalDigit}*)'.format(NonZeroDigit=non_zero_digit_re, DecimalDigit=decimal_digit_re)
 exponent_indicator_re       = r'[eE]'
 signed_integer_re           = r'[-+]?{DecimalDigits}'.format(DecimalDigits=decimal_digits_re)
-exponent_part_re            = '({ExponentIndicator}{SignedInteger})'.format(ExponentIndicator=exponent_indicator_re, SignedInteger=signed_integer_re)
-decimal_literal_re          = '({DecimalIntegerLiteral}\.({DecimalDigits})?{ExponentPart}?)|(\.{DecimalDigits}{ExponentPart}?)|({DecimalIntegerLiteral}{ExponentPart}?)'.format(DecimalIntegerLiteral=decimal_integer_literal_re, DecimalDigits=decimal_digits_re, ExponentPart=exponent_part_re)
+
+decimal_integer_literal_re  = '0|({NonZeroDigit}{DecimalDigit}*)' \
+                                    .format(NonZeroDigit=non_zero_digit_re, \
+                                            DecimalDigit=decimal_digit_re)
+
+exponent_part_re            = '({ExponentIndicator}{SignedInteger})' \
+                                    .format(ExponentIndicator=exponent_indicator_re, \
+                                            SignedInteger=signed_integer_re)
+
+decimal_literal_re          = '({DecimalIntegerLiteral}\.({DecimalDigits})?{ExponentPart}?)|(\.{DecimalDigits}{ExponentPart}?)|({DecimalIntegerLiteral}{ExponentPart}?)' \
+                                    .format(DecimalIntegerLiteral=decimal_integer_literal_re, \
+                                            DecimalDigits=decimal_digits_re, \
+                                            ExponentPart=exponent_part_re)
 
 @TOKEN(decimal_literal_re)
 def t_NUMBER_decimal_literal(t):
