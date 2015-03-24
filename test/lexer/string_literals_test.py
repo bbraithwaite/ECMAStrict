@@ -1,5 +1,5 @@
 """
-Tests for string literals.
+Tests for 7.8.4 String Literals
 """
 
 import unittest
@@ -14,7 +14,9 @@ class StringLiteralsTest(unittest.TestCase):
         tokens = [
             # (input, expectedType, expectedValue)
             ("''", 'STRING', ''),
-            ("'foo bar'", 'STRING', 'foo bar')
+            ("'foo bar'", 'STRING', 'foo bar'),
+            ('""', 'STRING', ''),
+            ('"foo bar"', 'STRING', 'foo bar')
         ]
 
         utils.assertTokenList(self, lexer, tokens)       
@@ -24,7 +26,11 @@ class StringLiteralsTest(unittest.TestCase):
             ("'"),
             ("'\\'"),
             ("\n"),
-            ("\r")
+            ("\r"),
+            ('"'),
+            ('"\\"'),
+            ('"\n"'),
+            ('"\r"')
         ]
 
         utils.assertTokensAreNone(self, lexer, tokens)
@@ -32,7 +38,8 @@ class StringLiteralsTest(unittest.TestCase):
     def test_string_literal_with_line_continuation(self):      
         tokens = [
             # (input, expectedType, expectedValue)
-            ("'foo\\\nbar\\\nbaz'", 'STRING', 'foo\\\nbar\\\nbaz')
+            ("'foo\\\nbar\\\nbaz'", 'STRING', 'foo\\\nbar\\\nbaz'),
+            ('"foo\\\nbar\\\nbaz"', 'STRING', 'foo\\\nbar\\\nbaz')
         ]
 
         utils.assertTokenList(self, lexer, tokens)    

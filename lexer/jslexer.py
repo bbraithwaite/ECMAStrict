@@ -1,3 +1,5 @@
+from ply.lex import TOKEN
+
 from identifiers import *
 from punctuators import *
 from literals import *
@@ -54,6 +56,8 @@ def t_IDENTIFIER(t):
     return t
 
 """
+7.8.4 String Literals
+
 StringLiteral ::
 'SingleStringCharacters (opt) '
 
@@ -75,9 +79,21 @@ LineTerminatorSequence ::
     <PS>
     <CR> <LF>
 """
-def t_STRING(t):   
-    r"'(([^'\\\n\r]+)|\\(\r\n|\n|\r))*'"
+
+line_continuation_re   = r"\\(\r\n|\n|\r)"
+single_string_re       = r"'(([^'\\\n\r]+)|" + line_continuation_re + ")*'"
+double_string_re       = r'"(([^"\\\n\r]+)|' + line_continuation_re + ')*"'
+
+@TOKEN(double_string_re)
+def t_STRING_double_quotes(t):
     t.value = t.value[1:-1] # remove the encasing quotes
+    t.type = 'STRING'
+    return t
+
+@TOKEN(single_string_re)
+def t_STRING_single_quotes(t):
+    t.value = t.value[1:-1] # remove the encasing quotes
+    t.type = 'STRING'
     return t
 
 # punctuators
