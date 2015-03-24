@@ -96,14 +96,25 @@ IdentifierPart ::
     <ZWNJ>
     <ZWJ>
 """
-
-unicode_escape_sequence_re       = r'u{HexDigit}{HexDigit}{HexDigit}{HexDigit}'.format(HexDigit=hex_digit_re)
 unicode_letter_re                = r'[a-zA-Z]'  # TODO: extend with all values for unicode letter categories
 unicode_digit_re                 = r'[0-9]'     # TODO: extend with all values for unicode digit
 unicode_connector_punctuation_re = r'[-_]'      # TODO: extend with all values for unicode connectors
-identifier_start_re     = r'{UnicodeLetter}|[$_]|(\\{UnicodeEscapeSequence})'.format(UnicodeLetter=unicode_letter_re, UnicodeEscapeSequence=unicode_escape_sequence_re)
-identifier_part_re      = r'{IdentifierStart}|{UnicodeDigit}|{UnicodeConnectorPunctuation}'.format(IdentifierStart=identifier_start_re, UnicodeDigit=unicode_digit_re, UnicodeConnectorPunctuation=unicode_connector_punctuation_re)
-identifier_name         = r'({IdentifierStart})({IdentifierPart})*'.format(IdentifierStart=identifier_start_re, IdentifierPart=identifier_part_re)
+
+unicode_escape_sequence_re       = r'u{HexDigit}{HexDigit}{HexDigit}{HexDigit}' \
+                                        .format(HexDigit=hex_digit_re)
+
+identifier_start_re              = r'{UnicodeLetter}|[$_]|(\\{UnicodeEscapeSequence})' \
+                                        .format(UnicodeLetter=unicode_letter_re, \
+                                                UnicodeEscapeSequence=unicode_escape_sequence_re)
+
+identifier_part_re               = r'{IdentifierStart}|{UnicodeDigit}|{UnicodeConnectorPunctuation}' \
+                                        .format(IdentifierStart=identifier_start_re, \
+                                                UnicodeDigit=unicode_digit_re, \
+                                                UnicodeConnectorPunctuation=unicode_connector_punctuation_re)
+
+identifier_name                  = r'({IdentifierStart})({IdentifierPart})*' \
+                                        .format(IdentifierStart=identifier_start_re, \
+                                                IdentifierPart=identifier_part_re)
 
 @TOKEN(identifier_name)
 def t_IDENTIFIER(t):
