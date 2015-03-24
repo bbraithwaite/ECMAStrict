@@ -118,3 +118,6 @@ console.log(hexExamplea);
 //console.log(051); octal literal example
 console.log('-- exp ---');
 console.log(1e1);
+
+var t = .1e1;
+console.log(t)

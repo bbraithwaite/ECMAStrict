@@ -14,3 +14,4 @@ class LiteralTest(unittest.TestCase):
 
     def test_false_boolean_literal(self):
         utils.validate_token(self, lexer, 'false', 'FALSE')
+        

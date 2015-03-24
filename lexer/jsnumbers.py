@@ -1,10 +1,23 @@
-import re
+from ply.lex import TOKEN
 
 """
-Hex Integer Literal
+7.8.3 Numeric Literals
+
+DecimalLiteral ::
+    DecimalIntegerLiteral . DecimalDigits (opt) ExponentPart (opt)
+    DecimalIntegerLiteral ExponentPart (opt)
+
+DecimalIntegerLiteral :: 
+    0
+    NonZeroDigit DecimalDigits (opt)
+
 """
-def t_NUMBER_hex(t):
-    r'0[x|X][0-9a-fA-F]+'
+
+hex_digit_re            = r'[0-9a-fA-F]'  
+hex_integer_literal_re  = r'0[x|X]' + hex_digit_re + '+'
+
+@TOKEN(hex_integer_literal_re)
+def t_NUMBER_hex_integer_literal(t):
     t.type = 'NUMBER'
     mv = 0 # mathematical value
     for hex_digit in t.value[2:]:
@@ -27,76 +40,17 @@ def t_NUMBER_hex(t):
     t.value = mv
     return t
 
-"""
-Decimal Literal
+decimal_digit_re            = r'[0-9]'
+decimal_digits_re           = r'[0-9]+'
+non_zero_digit_re           = r'[1-9]'
+decimal_integer_literal_re  = '0|({NonZeroDigit}{DecimalDigit}*)'.format(NonZeroDigit=non_zero_digit_re, DecimalDigit=decimal_digit_re)
+exponent_indicator_re       = r'[eE]'
+signed_integer_re           = r'[-+]?{DecimalDigits}'.format(DecimalDigits=decimal_digits_re)
+exponent_part_re            = '({ExponentIndicator}{SignedInteger})'.format(ExponentIndicator=exponent_indicator_re, SignedInteger=signed_integer_re)
+decimal_literal_re          = '({DecimalIntegerLiteral}\.({DecimalDigits})?{ExponentPart}?)|(\.{DecimalDigits}{ExponentPart}?)|({DecimalIntegerLiteral}{ExponentPart}?)'.format(DecimalIntegerLiteral=decimal_integer_literal_re, DecimalDigits=decimal_digits_re, ExponentPart=exponent_part_re)
 
-***Note:*** Regex can be condensed. Separate for now to correspond with spec grammar.
-
-"""
-def t_NUMBER_integer_literal_exponent(t):
-    # DecimalIntegerLiteral ExponentPart
-    r'[0-9]+[eE](-|\+)?[0-9]+'
-
-    if check_single_leading_zero(t):
-        leading_zero_error(t)
-        return None
-
+@TOKEN(decimal_literal_re)
+def t_NUMBER_decimal_literal(t):
     t.type = 'NUMBER'
     t.value = float(t.value)
     return t
-
-def t_NUMBER_decimal_integer_literal_digits_exponent(t):
-    # DecimalIntegerLiteral . DecimalDigits ExponentPart
-    r'[0-9]+\.[0-9]+[eE](-|\+)?[0-9]+'
-
-    if check_single_leading_zero(t):
-        leading_zero_error(t)
-        return None
-
-    t.type = 'NUMBER'
-    t.value = float(t.value)
-    return t
-
-def t_NUMBER_decimal_integer_literal_exponent(t):
-    # DecimalIntegerLiteral . ExponentPart
-    r'[0-9]+\.[eE](-|\+)?[0-9]+'
-
-    if check_single_leading_zero(t):
-        leading_zero_error(t)
-        return None
-
-    t.type = 'NUMBER'
-    t.value = float(t.value)
-    return t
-
-def t_NUMBER_decimal_integer_literal_digits(t):
-    # DecimalIntegerLiteral . DecimalDigits
-    r'[0-9]+\.[0-9]*'
-
-    if check_single_leading_zero(t):
-        leading_zero_error(t)
-        return None
-
-    t.type = 'NUMBER'
-    t.value = float(t.value)
-    return t
-
-def t_NUMBER_integer_literal(t):
-    # DecimalIntegerLiteral    
-    r'[0-9]+'
-
-    if check_single_leading_zero(t):
-        leading_zero_error(t)
-        return None
-
-    t.type = 'NUMBER'
-    t.value = float(t.value)
-    return t
-
-def leading_zero_error(t):
-    print("'%s' has unexpected number" % t.value)
-    t.lexer.skip(1) 
-
-def check_single_leading_zero(t):
-    # invalid decimal e.g. 00.01
-    return re.match('0[0-9]+', t.value)

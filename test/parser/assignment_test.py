@@ -35,3 +35,24 @@ class AssigmentTest(unittest.TestCase):
             ('var', 'foo', ('number', 1.0)),
             ('assign', 'foo', ('number', 3.0))
         ])
+
+
+# TODO: these should be parser tests
+
+# def test_with_decimal_and_digits_cannot_start_with_multiple_zeros(self):
+#      utils.assertTokensAreNone(self, lexer, ['00.01'])
+
+# def test_with_decimal_and_digits_and_exponent_cannot_start_with_multiple_zeros(self):
+#     utils.assertTokensAreNone(self, lexer, ['00.0e1'])
+
+# def test_with_decimal_and_exponent_cannot_start_with_multiple_zeros(self):
+#     utils.assertTokensAreNone(self, lexer, ['00.e1'])
+
+# def test_with_integer_and_exponent_cannot_start_with_multiple_zeros(self):
+#     utils.assertTokensAreNone(self, lexer, ['00e1'])
+
+# def test_with_decimal_integer_literal_cannot_start_with_multiple_zeros(self):
+#     utils.assertTokensAreNone(self, lexer, ['00'])
+
+# def test_with_decimal_integer_literal_exponent_cannot_start_with_multiple_zeros(self):
+#     utils.assertTokensAreNone(self, lexer, ['00e1'])

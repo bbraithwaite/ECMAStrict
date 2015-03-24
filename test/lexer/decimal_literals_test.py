@@ -1,14 +1,5 @@
 """
-Tests for the numeric literals that start with a Decima Literal grammar section below:
-
-DecimalLiteral ::
-    DecimalIntegerLiteral . DecimalDigits (opt) ExponentPart (opt)
-    DecimalIntegerLiteral ExponentPart (opt)
-
-DecimalIntegerLiteral :: 
-    0
-    NonZeroDigit DecimalDigits (opt)
-
+Tests for 7.8.3 Numeric Literals.
 """
 
 import unittest
@@ -19,10 +10,6 @@ import lexer.jslexer
 lexer = lex.lex(module=lexer.jslexer)
 
 class DecimalIntegerLiteralTest(unittest.TestCase):
-    """
-    Tests combiation:
-        DecimalIntegerLiteral
-    """
     def test_with_decimal_integer_literal(self):
         tokens = [
             # (input, expectedType, expectedValue)
@@ -32,9 +19,6 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
         ]
 
         utils.assertTokenList(self, lexer, tokens)
-
-    def test_with_decimal_integer_literal_cannot_start_with_multiple_zeros(self):
-        utils.assertTokensAreNone(self, lexer, ['00'])
 
     def test_with_decimal_integer_literal_exponent(self):
         tokens = [
@@ -46,14 +30,7 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
 
         utils.assertTokenList(self, lexer, tokens)
 
-    def test_with_decimal_integer_literal_exponent_cannot_start_with_multiple_zeros(self):
-        utils.assertTokensAreNone(self, lexer, ['00e1'])
-
-    """
-    Tests combiation:
-        DecimalIntegerLiteral . DecimalDigits
-    """
-    def test_with_decimal_and_digits_matches_tokens(self):
+    def test_with_decimal_and_digits(self):
         tokens = [
             # (input, expectedType, expectedValue)
             ('0.0', 'NUMBER', 0),
@@ -61,19 +38,14 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
             ('123.0', 'NUMBER', 123), 
             ('123.456', 'NUMBER', 123.456),
             ('123.', 'NUMBER', 123),
-            ('123.', 'NUMBER', 123)
+            ('123.', 'NUMBER', 123),
+            ('.0', 'NUMBER', 0),
+            ('.12', 'NUMBER', 0.12)
         ]
 
         utils.assertTokenList(self, lexer, tokens)
 
-    def test_with_decimal_and_digits_cannot_start_with_multiple_zeros(self):
-         utils.assertTokensAreNone(self, lexer, ['00.01'])
-
-    """
-    Tests combiation:
-        DecimalIntegerLiteral . DecimalDigits ExponentPart
-    """
-    def test_with_decimal_and_digits_and_exponent_matches_tokens(self):
+    def test_with_decimal_and_digits_and_exponent(self):
         tokens = [
             # (input, expectedType, expectedValue)
             ('1.0e1', 'NUMBER', 10),
@@ -84,13 +56,17 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
 
         utils.assertTokenList(self, lexer, tokens)
 
-    def test_with_decimal_and_digits_and_exponent_cannot_start_with_multiple_zeros(self):
-        utils.assertTokensAreNone(self, lexer, ['00.0e1'])
+    def test_with_decimal_and_exponent(self):
+        tokens = [
+            # (input, expectedType, expectedValue)
+            ('.0e1', 'NUMBER', 0),
+            ('.0E1', 'NUMBER', 0),
+            ('.1e+1', 'NUMBER', 1.0),
+            ('.1e-1', 'NUMBER', 0.01)
+        ]
 
-    """
-    Tests combiation:
-        DecimalIntegerLiteral . ExponentPart
-    """
+        utils.assertTokenList(self, lexer, tokens)
+
     def test_with_decimal_and_exponent_matches_tokens(self):
         tokens = [
             # (input, expectedType, expectedValue)
@@ -101,13 +77,6 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
 
         utils.assertTokenList(self, lexer, tokens)
 
-    def test_with_decimal_and_exponent_cannot_start_with_multiple_zeros(self):
-        utils.assertTokensAreNone(self, lexer, ['00.e1'])
-
-    """
-    Tests combiation:
-        DecimalIntegerLiteral ExponentPart
-    """
     def test_with_integer_and_exponent_matches_tokens(self):
         tokens = [
             # (input, expectedType, expectedValue)
@@ -117,6 +86,3 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
         ]
 
         utils.assertTokenList(self, lexer, tokens)
-
-    def test_with_integer_and_exponent_cannot_start_with_multiple_zeros(self):
-        utils.assertTokensAreNone(self, lexer, ['00e1'])
