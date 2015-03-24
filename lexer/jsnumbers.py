@@ -14,7 +14,7 @@ DecimalIntegerLiteral ::
 """
 
 hex_digit_re            = r'[0-9a-fA-F]'  
-hex_integer_literal_re  = r'0[x|X]' + hex_digit_re + '+'
+hex_integer_literal_re  = '0[x|X]{HexDigit}+'.format(HexDigit=hex_digit_re)
 
 @TOKEN(hex_integer_literal_re)
 def t_NUMBER_hex_integer_literal(t):

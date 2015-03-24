@@ -18,7 +18,13 @@ class KeywordTests(unittest.TestCase):
             ('x', 'IDENTIFIER'),
             ('X', 'IDENTIFIER'),
             ('$', 'IDENTIFIER'),
-            ('_', 'IDENTIFIER')
+            ('_', 'IDENTIFIER'),
+            ('\u0000', 'IDENTIFIER'),
+            ('x\u0000', 'IDENTIFIER'),
+            ('x0', 'IDENTIFIER'),
+            ('x-', 'IDENTIFIER'),
+            ('x_', 'IDENTIFIER'),
+            ('x_-0a\u0000', 'IDENTIFIER'),
         ]
 
         utils.assertTokenList(self, lexer, tokens)

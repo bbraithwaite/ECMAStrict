@@ -1,17 +1,87 @@
-from ply.lex import TOKEN
-
-from identifiers import *
-from punctuators import *
-from literals import *
+from jsidentifiers import *
 from jsnumbers import *
+from jsstrings import *
+
+#
+#   Punctuators (7.7)
+#
+punctuators_symbols = (
+    'LBRACE',           # {
+    'RBRACE',           # }
+    'LPAREN',           # (
+    'RPAREN',           # )
+    'LBRACKET',         # [
+    'RBRACKET',         # ]
+    'DOT',              # .
+    'SEMICOLON',        # ;
+    'COMMA'             # ,
+)
+
+punctuators_arithmetic = (
+    'PLUS',             # +
+    'MINUS',            # -
+    'MULTIPLY',         # *
+    'MODULO',           # %
+    'PLUSPLUS',         # ++
+    'MINUSMINUS'        # --
+)
+    
+punctuators_assignment = (
+    'EQUAL',            # =
+    'PLUSEQUAL',        # +=
+    'MINUSEQUAL',       # -=
+    'MULTIPLYEQUAL',    # *=
+    'MODULOEQUAL',      # %=
+    'LSHIFTEQUAL',      # <<=
+    'RSHIFTEQUAL',      # >>=
+    'LOGRSHIFTEQUAL',   # >>>=
+    'ANDEQUAL',          # &=
+    'OREQUAL',          # |=
+    'XOREQUAL'          # ^=
+)
+
+punctuators_bitwise = (
+    'LSHIFT',           # <<
+    'RSHIFT',           # >>
+    'LOGRSHIFT',        # >>>
+    'AND',              # &
+    'OR',               # |
+    'XOR',              # ^
+    'BWNOT',            # ~
+)
+
+punctuators_comparison = (
+    'LT',               # <
+    'GT',               # >
+    'LTE',              # <=
+    'GTE',              # >=,
+    'EQUALV',           # ==  (value, with type coercion)
+    'NOTEQUALV',        # !=  (value, with type coercion)
+    'EQUALVT',          # === (value and type)
+    'NOTEQUALVT'        # !== (value and type)
+)
+
+punctuators_conditional = (
+    'TERNARY',          # ?
+    'COLON'             # :
+)
+
+punctuators_logical = (
+    'ANDAND',           # &&,
+    'NOT',              # !
+    'OROR',             # ||
+)
+
+div_punctuators = (
+    'FSLASH',           # /
+    'FSLASHEQUAL'       # /=
+)
 
 tokens = (
-    # identifiers
     variable + 
     keywords + 
     future_keywords + 
     future_strict_keywords + 
-    # punctuators
     punctuators_symbols + 
     punctuators_assignment + 
     punctuators_arithmetic + 
@@ -20,81 +90,12 @@ tokens = (
     punctuators_comparison + 
     punctuators_logical + 
     div_punctuators +
-    # literals
     literal_keywords
 )
 
 def t_single_line_comment(t):
-    # Only single line comments are supported
     r'^//.*'
     pass
-
-def t_IDENTIFIER(t):
-    # identifiers must start with:
-    #   UnicodeLetter (a-zA-Z in this example, for simplicity)
-    #   $
-    #   _ (underscore)
-    #   \ UnicodeEscapeSequence (although supported in this project)
-    # subsequent chars can be:
-    #   Same as initial letter
-    #   Unicode digit (0-9)
-    #   (Other unicode chars are possible but not supported)
-    r'[a-zA-Z$_][a-zA-Z$_0-9]*'
-    v = t.value.upper() 
-    if v in keywords:
-        t.type = t.value.upper()
-
-    if v in future_keywords:
-        t.type = t.value.upper()
-        
-    if v in future_strict_keywords:
-        t.type = t.value.upper()
-
-    if v in literal_keywords:
-        t.type = t.value.upper()
-
-    return t
-
-"""
-7.8.4 String Literals
-
-StringLiteral ::
-'SingleStringCharacters (opt) '
-
-SingleStringCharacters ::
-    SingleStringCharacter SingleStringCharacters (opt)
-
-SingleStringCharacter ::
-    SourceCharacter but not one of ' or \ or LineTerminator 
-    \ EscapeSequence
-    LineContinuation
-
-LineContinuation ::
-    \ LineTerminatorSequence
-
-LineTerminatorSequence :: 
-    <LF>
-    <CR> [lookahead must be <LF> ] 
-    <LS>
-    <PS>
-    <CR> <LF>
-"""
-
-line_continuation_re   = r"\\(\r\n|\n|\r)"
-single_string_re       = r"'(([^'\\\n\r]+)|" + line_continuation_re + ")*'"
-double_string_re       = r'"(([^"\\\n\r]+)|' + line_continuation_re + ')*"'
-
-@TOKEN(double_string_re)
-def t_STRING_double_quotes(t):
-    t.value = t.value[1:-1] # remove the encasing quotes
-    t.type = 'STRING'
-    return t
-
-@TOKEN(single_string_re)
-def t_STRING_single_quotes(t):
-    t.value = t.value[1:-1] # remove the encasing quotes
-    t.type = 'STRING'
-    return t
 
 # punctuators
 t_LBRACE        = r'{'
