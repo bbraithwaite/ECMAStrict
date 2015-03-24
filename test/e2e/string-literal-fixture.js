@@ -1,0 +1,2 @@
+var lineContinuation = 'hello\
+world';

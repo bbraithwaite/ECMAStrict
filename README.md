@@ -1,3 +1,3 @@
 Work in progress.
 
-Will be a lexer, parser and interpreter for a sub-set of JavaScript for my own experimentation.
+A lexer, parser and interpreter for a strict sub-set of JavaScript written in Python.

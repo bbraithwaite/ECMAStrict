@@ -85,7 +85,7 @@ class DecimalIntegerLiteralTest(unittest.TestCase):
         utils.assertTokenList(self, lexer, tokens)
 
     def test_with_decimal_and_digits_and_exponent_cannot_start_with_multiple_zeros(self):
-         utils.assertTokensAreNone(self, lexer, ['00.0e1'])
+        utils.assertTokensAreNone(self, lexer, ['00.0e1'])
 
     """
     Tests combiation:

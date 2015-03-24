@@ -53,9 +53,30 @@ def t_IDENTIFIER(t):
 
     return t
 
-def t_STRING(t):
-    # String literals must use single quotes in this lexer.
-    r"'(.)*'"
+"""
+StringLiteral ::
+'SingleStringCharacters (opt) '
+
+SingleStringCharacters ::
+    SingleStringCharacter SingleStringCharacters (opt)
+
+SingleStringCharacter ::
+    SourceCharacter but not one of ' or \ or LineTerminator 
+    \ EscapeSequence
+    LineContinuation
+
+LineContinuation ::
+    \ LineTerminatorSequence
+
+LineTerminatorSequence :: 
+    <LF>
+    <CR> [lookahead must be <LF> ] 
+    <LS>
+    <PS>
+    <CR> <LF>
+"""
+def t_STRING(t):   
+    r"'(([^'\\\n\r]+)|\\(\r\n|\n|\r))*'"
     t.value = t.value[1:-1] # remove the encasing quotes
     return t
 

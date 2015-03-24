@@ -34,6 +34,7 @@ Decimal Literal
 
 """
 def t_NUMBER_integer_literal_exponent(t):
+    # DecimalIntegerLiteral ExponentPart
     r'[0-9]+[eE](-|\+)?[0-9]+'
 
     if check_single_leading_zero(t):
@@ -45,6 +46,7 @@ def t_NUMBER_integer_literal_exponent(t):
     return t
 
 def t_NUMBER_decimal_integer_literal_digits_exponent(t):
+    # DecimalIntegerLiteral . DecimalDigits ExponentPart
     r'[0-9]+\.[0-9]+[eE](-|\+)?[0-9]+'
 
     if check_single_leading_zero(t):
@@ -56,6 +58,7 @@ def t_NUMBER_decimal_integer_literal_digits_exponent(t):
     return t
 
 def t_NUMBER_decimal_integer_literal_exponent(t):
+    # DecimalIntegerLiteral . ExponentPart
     r'[0-9]+\.[eE](-|\+)?[0-9]+'
 
     if check_single_leading_zero(t):
@@ -67,6 +70,7 @@ def t_NUMBER_decimal_integer_literal_exponent(t):
     return t
 
 def t_NUMBER_decimal_integer_literal_digits(t):
+    # DecimalIntegerLiteral . DecimalDigits
     r'[0-9]+\.[0-9]*'
 
     if check_single_leading_zero(t):
@@ -78,6 +82,7 @@ def t_NUMBER_decimal_integer_literal_digits(t):
     return t
 
 def t_NUMBER_integer_literal(t):
+    # DecimalIntegerLiteral    
     r'[0-9]+'
 
     if check_single_leading_zero(t):
@@ -88,9 +93,6 @@ def t_NUMBER_integer_literal(t):
     t.value = float(t.value)
     return t
 
-"""
-Utils
-"""
 def leading_zero_error(t):
     print("'%s' has unexpected number" % t.value)
     t.lexer.skip(1) 

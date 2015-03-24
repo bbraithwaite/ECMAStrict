@@ -49,6 +49,8 @@ console.log(escapeSequenceBackSlash);
 console.log(escapeSequenceB);
 console.log(multiline);
 
-var test = 'anything except	\115';
 
-console.log(test)
+var example5 = 'hello\
+world';
+console.log(example5);
+
