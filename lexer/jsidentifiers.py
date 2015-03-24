@@ -70,11 +70,10 @@ future_strict_keywords = (
 #   Literals (7.8)
 #
 literal_keywords = (
-    'NULL',             # null
-    'TRUE',             # true
-    'FALSE',            # false
-    'NUMBER',           # number literal
-    'STRING'            # string literal
+    'NULL_LITERAL',     # null
+    'BOOLEAN_LITERAL',  # true / false
+    'NUMBER_LITERAL',   # number literal
+    'STRING_LITERAL'    # string literal
 )
 
 """
@@ -129,7 +128,11 @@ def t_IDENTIFIER(t):
     if v in future_strict_keywords:
         t.type = t.value.upper()
 
-    if v in literal_keywords:
-        t.type = t.value.upper()
+    if v == 'TRUE':
+        t.type = 'BOOLEAN_LITERAL'
+    elif v == 'FALSE':
+        t.type = 'BOOLEAN_LITERAL'
+    elif v == 'NULL':
+        t.type = 'NULL_LITERAL'
 
     return t

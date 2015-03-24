@@ -23,11 +23,11 @@ class AssigmentTest(unittest.TestCase):
 
     def test_variable_boolean_true(self):
         parse_tree = parser.parse("var foo = true;", lexer=lexer)
-        self.assertEquals(parse_tree, [('var', 'foo', ('true', 'true'))])
+        self.assertEquals(parse_tree, [('var', 'foo', ('boolean', 'true'))])
 
     def test_variable_boolean_false(self):
         parse_tree = parser.parse("var foo = false;", lexer=lexer)
-        self.assertEquals(parse_tree, [('var', 'foo', ('false', 'false'))])
+        self.assertEquals(parse_tree, [('var', 'foo', ('boolean', 'false'))])
 
     def test_variable_assignment(self):
         parse_tree = parser.parse("var foo = 1;foo = 3;", lexer=lexer)

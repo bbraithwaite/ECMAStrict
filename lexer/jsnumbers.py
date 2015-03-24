@@ -10,7 +10,6 @@ DecimalLiteral ::
 DecimalIntegerLiteral :: 
     0
     NonZeroDigit DecimalDigits (opt)
-
 """
 
 hex_digit_re            = r'[0-9a-fA-F]'  
@@ -18,7 +17,7 @@ hex_integer_literal_re  = '0[x|X]{HexDigit}+'.format(HexDigit=hex_digit_re)
 
 @TOKEN(hex_integer_literal_re)
 def t_NUMBER_hex_integer_literal(t):
-    t.type = 'NUMBER'
+    t.type = 'NUMBER_LITERAL'
     mv = 0 # mathematical value
     for hex_digit in t.value[2:]:
         mv = mv * 16
@@ -61,6 +60,6 @@ decimal_literal_re          = '({DecimalIntegerLiteral}\.({DecimalDigits})?{Expo
 
 @TOKEN(decimal_literal_re)
 def t_NUMBER_decimal_literal(t):
-    t.type = 'NUMBER'
+    t.type = 'NUMBER_LITERAL'
     t.value = float(t.value)
     return t

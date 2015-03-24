@@ -13,10 +13,10 @@ class StringLiteralsTest(unittest.TestCase):
     def test_string_literal(self):      
         tokens = [
             # (input, expectedType, expectedValue)
-            ("''", 'STRING', ''),
-            ("'foo bar'", 'STRING', 'foo bar'),
-            ('""', 'STRING', ''),
-            ('"foo bar"', 'STRING', 'foo bar')
+            ("''", 'STRING_LITERAL', ''),
+            ("'foo bar'", 'STRING_LITERAL', 'foo bar'),
+            ('""', 'STRING_LITERAL', ''),
+            ('"foo bar"', 'STRING_LITERAL', 'foo bar')
         ]
 
         utils.assertTokenList(self, lexer, tokens)       
@@ -38,8 +38,8 @@ class StringLiteralsTest(unittest.TestCase):
     def test_string_literal_with_line_continuation(self):      
         tokens = [
             # (input, expectedType, expectedValue)
-            ("'foo\\\nbar\\\nbaz'", 'STRING', 'foo\\\nbar\\\nbaz'),
-            ('"foo\\\nbar\\\nbaz"', 'STRING', 'foo\\\nbar\\\nbaz')
+            ("'foo\\\nbar\\\nbaz'", 'STRING_LITERAL', 'foo\\\nbar\\\nbaz'),
+            ('"foo\\\nbar\\\nbaz"', 'STRING_LITERAL', 'foo\\\nbar\\\nbaz')
         ]
 
         utils.assertTokenList(self, lexer, tokens)    

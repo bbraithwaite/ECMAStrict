@@ -31,12 +31,12 @@ single_string_re       = r"'(([^'\\\n\r]+)|{LineContinuation})*'".format(LineCon
 
 @TOKEN(double_string_re)
 def t_STRING_double_quotes(t):
-    t.type = 'STRING'
+    t.type = 'STRING_LITERAL'
     t.value = t.value[1:-1] # remove the encasing quotes
     return t
 
 @TOKEN(single_string_re)
 def t_STRING_single_quotes(t):
-    t.type = 'STRING'
+    t.type = 'STRING_LITERAL'
     t.value = t.value[1:-1] # remove the encasing quotes
     return t
