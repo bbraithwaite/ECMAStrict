@@ -43,3 +43,12 @@ class StringLiteralsTest(unittest.TestCase):
         ]
 
         utils.assertTokenList(self, lexer, tokens)    
+
+    def test_string_literal_escape_sequences(self):
+        tokens = [
+            ("'\u221e'", 'STRING_LITERAL', '\u221e'),
+            ('"To \u221e and beyond"', 'STRING_LITERAL', 'To \u221e and beyond'),
+            ("'Show me the \xA3'", 'STRING_LITERAL', 'Show me the \xA3')
+        ]
+
+        utils.assertTokenList(self, lexer, tokens)

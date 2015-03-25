@@ -2,14 +2,6 @@ from ply.lex import TOKEN
 
 """
 7.8.3 Numeric Literals
-
-DecimalLiteral ::
-    DecimalIntegerLiteral . DecimalDigits (opt) ExponentPart (opt)
-    DecimalIntegerLiteral ExponentPart (opt)
-
-DecimalIntegerLiteral :: 
-    0
-    NonZeroDigit DecimalDigits (opt)
 """
 
 hex_digit_re            = r'[0-9a-fA-F]'  
@@ -46,16 +38,16 @@ exponent_indicator_re       = r'[eE]'
 signed_integer_re           = r'[-+]?{DecimalDigits}'.format(DecimalDigits=decimal_digits_re)
 
 decimal_integer_literal_re  = '0|({NonZeroDigit}{DecimalDigit}*)' \
-                                    .format(NonZeroDigit=non_zero_digit_re, \
+                                    .format(NonZeroDigit=non_zero_digit_re,
                                             DecimalDigit=decimal_digit_re)
 
 exponent_part_re            = '({ExponentIndicator}{SignedInteger})' \
-                                    .format(ExponentIndicator=exponent_indicator_re, \
+                                    .format(ExponentIndicator=exponent_indicator_re,
                                             SignedInteger=signed_integer_re)
 
 decimal_literal_re          = '({DecimalIntegerLiteral}\.({DecimalDigits})?{ExponentPart}?)|(\.{DecimalDigits}{ExponentPart}?)|({DecimalIntegerLiteral}{ExponentPart}?)' \
-                                    .format(DecimalIntegerLiteral=decimal_integer_literal_re, \
-                                            DecimalDigits=decimal_digits_re, \
+                                    .format(DecimalIntegerLiteral=decimal_integer_literal_re,
+                                            DecimalDigits=decimal_digits_re,
                                             ExponentPart=exponent_part_re)
 
 @TOKEN(decimal_literal_re)

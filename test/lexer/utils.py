@@ -3,8 +3,8 @@
 def validate_token_and_value(self, lexer, input, expectedType, expectedValue):
     lexer.input(input)
     token = lexer.token()
-    self.assertEqual(token.type, expectedType)
     self.assertEqual(token.value, expectedValue, 'expected: ' + str(expectedValue) + ' but got: ' + str(token.value))
+    self.assertEqual(token.type, expectedType)
 
 def validate_token(self, lexer, input, expectedType):
     validate_token_and_value(self, lexer, input, expectedType, input)
