@@ -27,22 +27,20 @@ escape_sequence_re          = r'({CharacterEscapeSequence}|{HexEscapeSequence}|{
 line_continuation_re        = r'\\{LineTerminatorSequence}'\
                                     .format(LineTerminatorSequence=line_terminator_sequence_re)
 
-double_string_characters_re = r'"(([^"\\\n\r]+)|(\\{EscapeSequence})|{LineContinuation})*"'\
+double_string_characters_re = r'([^\"\\\n\r]+)|(\\{EscapeSequence})|{LineContinuation}'\
                                      .format(LineContinuation=line_continuation_re,
                                          EscapeSequence=escape_sequence_re)
 
-single_string_characters_re = r"'(([^'\\\n\r]+)|(\\{EscapeSequence})|{LineContinuation})*'"\
+single_string_characters_re = r'([^\'\\\n\r]+)|(\\{EscapeSequence})|{LineContinuation}'\
                                      .format(LineContinuation=line_continuation_re,
                                          EscapeSequence=escape_sequence_re)
 
-@TOKEN(double_string_characters_re)
-def t_STRING_literal_double(t):
-    t.type = 'STRING_LITERAL'
-    t.value = t.value[1:-1] # remove the encasing quotes
-    return t
+string_literal_re           = r'\"({DoubleStringCharacters})*\"|\'({SingleStringCharacters})*\''\
+                                    .format(SingleStringCharacters=single_string_characters_re,
+                                        DoubleStringCharacters=double_string_characters_re)
 
-@TOKEN(single_string_characters_re)
-def t_STRING_literal_single(t):
+@TOKEN(string_literal_re)
+def t_STRING_literal(t):
     t.type = 'STRING_LITERAL'
     t.value = t.value[1:-1] # remove the encasing quotes
     return t
