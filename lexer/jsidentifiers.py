@@ -72,8 +72,9 @@ future_strict_keywords = (
 literal_keywords = (
     'NULL_LITERAL',     # null
     'BOOLEAN_LITERAL',  # true / false
-    'NUMBER_LITERAL',   # number literal
-    'STRING_LITERAL'    # string literal
+    'NUMBER_LITERAL',  
+    'STRING_LITERAL',  
+    'REGEX_LITERAL'
 )
 
 """

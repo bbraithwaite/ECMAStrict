@@ -1,6 +1,7 @@
 from jsstrings import *
 from jsidentifiers import *
 from jsnumbers import *
+from jsregex import *
 
 #
 #   Punctuators (7.7)
