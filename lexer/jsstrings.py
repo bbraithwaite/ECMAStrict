@@ -15,11 +15,11 @@ hex_escape_sequence_re      = r'x{HexDigit}{HexDigit}'\
 unicode_escape_sequence_re  = r'u{HexDigit}{HexDigit}{HexDigit}{HexDigit}'\
                                     .format(HexDigit=hex_digit_re)
 
-character_escape_sequence_re = r'{SingleEscapeCharacter}|{NonEscapeCharacter}'\
+character_escape_sequence_re = r'({SingleEscapeCharacter}|{NonEscapeCharacter})'\
                                     .format(SingleEscapeCharacter=single_escape_character_re,
                                         NonEscapeCharacter=non_escape_character_re)
 
-escape_sequence_re          = r'{UnicodeEscapeSequence}|{HexEscapeSequence}'\
+escape_sequence_re          = r'({CharacterEscapeSequence}|{HexEscapeSequence}|{UnicodeEscapeSequence})'\
                                     .format(CharacterEscapeSequence=character_escape_sequence_re,
                                         HexEscapeSequence=hex_escape_sequence_re,
                                         UnicodeEscapeSequence=unicode_escape_sequence_re)
