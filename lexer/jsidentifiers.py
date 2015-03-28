@@ -1,7 +1,7 @@
 from jsnumbers import hex_digit_re
 from ply.lex import TOKEN
 
-variable = (
+identifer = (
     'IDENTIFIER',
 )
 

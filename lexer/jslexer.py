@@ -6,7 +6,7 @@ from jsregex import *
 #
 #   Punctuators (7.7)
 #
-punctuators_symbols = (
+punctuators = (
     'LBRACE',           # {
     'RBRACE',           # }
     'LPAREN',           # (
@@ -15,19 +15,13 @@ punctuators_symbols = (
     'RBRACKET',         # ]
     'DOT',              # .
     'SEMICOLON',        # ;
-    'COMMA'             # ,
-)
-
-punctuators_arithmetic = (
+    'COMMA',            # ,
     'PLUS',             # +
     'MINUS',            # -
     'MULTIPLY',         # *
     'MODULO',           # %
     'PLUSPLUS',         # ++
-    'MINUSMINUS'        # --
-)
-    
-punctuators_assignment = (
+    'MINUSMINUS',       # --
     'EQUAL',            # =
     'PLUSEQUAL',        # +=
     'MINUSEQUAL',       # -=
@@ -36,12 +30,9 @@ punctuators_assignment = (
     'LSHIFTEQUAL',      # <<=
     'RSHIFTEQUAL',      # >>=
     'LOGRSHIFTEQUAL',   # >>>=
-    'ANDEQUAL',          # &=
+    'ANDEQUAL',         # &=
     'OREQUAL',          # |=
-    'XOREQUAL'          # ^=
-)
-
-punctuators_bitwise = (
+    'XOREQUAL',         # ^=
     'LSHIFT',           # <<
     'RSHIFT',           # >>
     'LOGRSHIFT',        # >>>
@@ -49,9 +40,6 @@ punctuators_bitwise = (
     'OR',               # |
     'XOR',              # ^
     'BWNOT',            # ~
-)
-
-punctuators_comparison = (
     'LT',               # <
     'GT',               # >
     'LTE',              # <=
@@ -59,18 +47,12 @@ punctuators_comparison = (
     'EQUALV',           # ==  (value, with type coercion)
     'NOTEQUALV',        # !=  (value, with type coercion)
     'EQUALVT',          # === (value and type)
-    'NOTEQUALVT'        # !== (value and type)
-)
-
-punctuators_conditional = (
+    'NOTEQUALVT',       # !== (value and type)
     'TERNARY',          # ?
-    'COLON'             # :
-)
-
-punctuators_logical = (
+    'COLON',            # :
     'ANDAND',           # &&,
     'NOT',              # !
-    'OROR',             # ||
+    'OROR'              # ||
 )
 
 div_punctuators = (
@@ -79,17 +61,11 @@ div_punctuators = (
 )
 
 tokens = (
-    variable + 
+    identifer + 
     keywords + 
     future_keywords + 
     future_strict_keywords + 
-    punctuators_symbols + 
-    punctuators_assignment + 
-    punctuators_arithmetic + 
-    punctuators_bitwise + 
-    punctuators_conditional + 
-    punctuators_comparison + 
-    punctuators_logical + 
+    punctuators +  
     div_punctuators +
     literal_keywords
 )
@@ -108,8 +84,6 @@ t_RBRACKET      = r'\]'
 t_DOT           = r'\.'
 t_SEMICOLON     = r';'
 t_COMMA         = r','
-
-# comparison
 t_LT            = r'<'
 t_GT            = r'>'
 t_LTE           = r'<='
@@ -118,16 +92,12 @@ t_EQUALVT       = r'==='
 t_NOTEQUALVT    = r'!==' 
 t_EQUALV        = r'==' 
 t_NOTEQUALV     = r'!='
-
-# arithmetic  
 t_PLUSPLUS      = r'\+\+'
 t_MINUSMINUS    = r'--'
 t_PLUS          = r'\+'
 t_MINUS         = r'-'
 t_MULTIPLY      = r'\*'
 t_MODULO        = r'%'
-
-# bitwise
 t_LSHIFT        = r'<<'
 t_RSHIFT        = r'>>'
 t_LOGRSHIFT     = r'>>>'
@@ -135,15 +105,11 @@ t_AND           = r'&'
 t_OR            = r'\|'
 t_XOR           = r'\^'
 t_BWNOT         = r'~'
-
-# logical
 t_NOT           = r'!'
 t_ANDAND        = r'&&'
 t_OROR          = r'\|\|'
 t_TERNARY       = r'\?'
 t_COLON         = r':'
-
-# assignment
 t_EQUAL         = r'='
 t_PLUSEQUAL     = r'\+='
 t_MINUSEQUAL    = r'-='
