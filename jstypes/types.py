@@ -1,3 +1,8 @@
+"""
+Types (8)
+Type Conversion and Testing (9)
+"""
+
 import re
 
 #
@@ -6,6 +11,9 @@ import re
 class BaseType:
     def toPrimitive(self):
         return self
+
+    def isCallable(self):
+        return Boolean('false')
 
     def toInteger(self):
         convert = Number(self.value())
