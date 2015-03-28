@@ -3,9 +3,6 @@ import types
 def _isNaN(type):
     return isinstance(type.value(), types.NaN)
 
-def _isZero(type):
-    return type.value() == 0
-
 #
 # The SameValue Algorithm (9.12)
 #
