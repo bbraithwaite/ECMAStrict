@@ -23,3 +23,5 @@ class ToStringTests(unittest.TestCase):
     def test_number_tostring(self):
         self.assertEquals(types.Number(1.0).toString().value(), '1.0')
         self.assertEquals(types.Number(-2.0).toString().value(), '-2.0')
+        self.assertEquals(types.Number('Infinity').toString().value(), 'Infinity')
+        self.assertEquals(types.Number('-Infinity').toString().value(), '-Infinity')

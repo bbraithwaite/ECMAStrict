@@ -91,7 +91,7 @@ class String(BaseType):
         return self.__value
             
     def toString(self):
-        return String(self.__value)
+        return self
 
 #
 # Number Data Type (8.5)
@@ -157,4 +157,10 @@ class Number(BaseType):
         return self.__value
             
     def toString(self):
+        if self.__value == float('inf'):
+            return String('Infinity')
+
+        if self.__value == float('-inf'):
+            return String('-Infinity')
+
         return String(str(self.__value))
