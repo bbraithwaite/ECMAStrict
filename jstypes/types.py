@@ -23,7 +23,7 @@ class BaseType:
         return convert
 
 #
-# Represents NaN (not a number) for use with Number typr
+# Represents NaN (not a number) for use with Number type
 #
 class NaN:
     def toString(self):
