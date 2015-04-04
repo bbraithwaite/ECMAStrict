@@ -30,7 +30,7 @@ class NaN:
         return String('NaN')
 
 #
-# Undefined Data Type (8.1)
+# Undefined Type (8.1)
 #
 class Undefined(BaseType):
     def toBoolean(self):
@@ -43,7 +43,7 @@ class Undefined(BaseType):
         return String('undefined')
 
 #
-# Null Data Type (8.2)
+# Null Type (8.2)
 #
 class Null(BaseType):
     def toBoolean(self):
@@ -55,7 +55,7 @@ class Null(BaseType):
     def toString(self):
         return String('null')
 #
-# Boolean Data Type (8.3)
+# Boolean Type (8.3)
 #
 class Boolean(BaseType):
     def __init__(self, value):
@@ -80,7 +80,7 @@ class Boolean(BaseType):
         return String(self.__value)
 
 #
-# String Data Type (8.4)
+# String Type (8.4)
 #
 class String(BaseType):
     def __init__(self, value):
@@ -102,7 +102,7 @@ class String(BaseType):
         return self
 
 #
-# Number Data Type (8.5)
+# Number Type (8.5)
 #
 class Number(BaseType):
     def __init__(self, value):
