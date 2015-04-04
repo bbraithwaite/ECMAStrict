@@ -1,6 +1,6 @@
-# JavaScript Implementation
+# ECMAScript (JavaScript) Implementation
 
-As a coding challenge, during evenings and weekends I've been implementing a lexer, parser, and runtime of the JavaScript language.
+As a coding challenge, during evenings and weekends I've been implementing a lexer, parser, and runtime of the ECMAScript language specification.
 
 I chose Python as the language so that I could make use of the excellent [PLY (Python Lex-Yacc)](http://www.dabeaz.com/ply/) implementation.
 
@@ -16,3 +16,4 @@ Still work in progress, current status:
 * lexer (near complete)
 * parser (50% complete)
 * runtime (started implementing type system)
+* interpreter (basic POC)
