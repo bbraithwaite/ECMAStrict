@@ -5,7 +5,7 @@ import types
 #
 class Object():
     def __init__(self):
-        self.__properties = []          # 
+        self.__properties = []          #
         self.__prototype = types.Null() # Object or Null. All objects have this.
         self.__extensible = True        # If true, own properties may be added to the object.
 

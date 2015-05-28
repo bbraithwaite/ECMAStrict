@@ -1,13 +1,14 @@
 import types
 
+
 def _isNaN(type):
     return isinstance(type.value(), types.NaN)
+
 
 #
 # The SameValue Algorithm (9.12)
 #
 def equal(x, y):
-    
     if isinstance(x, types.Undefined):
         return True
     elif isinstance(x, types.Null):
