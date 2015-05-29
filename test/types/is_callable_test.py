@@ -1,5 +1,6 @@
 import unittest
-import jstypes.types as types
+from jstypes import types
+
 
 class IsCallableTests(unittest.TestCase):
     def test_undefined_iscallable(self):
@@ -15,4 +16,4 @@ class IsCallableTests(unittest.TestCase):
         self.assertFalse(types.Number(0).isCallable().value())
 
     def test_string_iscallable(self):
-        self.assertFalse(types.String('').isCallable().value())        
+        self.assertFalse(types.String('').isCallable().value())

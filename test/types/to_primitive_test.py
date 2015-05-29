@@ -1,5 +1,6 @@
 import unittest
-import jstypes.types as types
+from jstypes import types
+
 
 class ToPrimitiveTests(unittest.TestCase):
     def test_undefined_toprimitive(self):
@@ -9,7 +10,7 @@ class ToPrimitiveTests(unittest.TestCase):
         self.assertIsInstance(types.Null().toPrimitive(), types.Null)
 
     def test_boolean_true_toprimitive(self):
-        t = types.Boolean('true')             
+        t = types.Boolean('true')
         conversion = t.toPrimitive()
         self.assertIsInstance(conversion, types.Boolean)
         self.assertEquals(conversion.value(), True)

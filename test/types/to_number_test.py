@@ -1,5 +1,6 @@
 import unittest
-import jstypes.types as types
+from jstypes import types
+
 
 class ToNumberTests(unittest.TestCase):
     def test_undefined_tonumber(self):

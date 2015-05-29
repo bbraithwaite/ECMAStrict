@@ -1,5 +1,6 @@
 import unittest
-import jstypes.types as types
+from jstypes import types
+
 
 class ToBooleanTests(unittest.TestCase):
     def test_undefined_toboolean(self):
@@ -21,7 +22,7 @@ class ToBooleanTests(unittest.TestCase):
         self.assertTrue(types.Number(1.0).toBoolean().value())
 
     def test_string_toboolean(self):
-        self.assertFalse(types.String('').toBoolean().value())        
+        self.assertFalse(types.String('').toBoolean().value())
         self.assertTrue(types.String('foo').toBoolean().value())
         self.assertTrue(types.String('true').toBoolean().value())
         self.assertTrue(types.String('false').toBoolean().value())

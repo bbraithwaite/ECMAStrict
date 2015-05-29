@@ -1,5 +1,22 @@
-from .types import Boolean, NaN, String, BaseType
 import re
+
+
+#
+# Base class for all types
+#
+class BaseType:
+    def toPrimitive(self):
+        return self
+
+    def isCallable(self):
+        return Boolean('false')
+
+    def toInteger(self):
+        convert = Number(self.value())
+        if not isinstance(convert.value(), NaN):
+            return Number(int(convert.value()))
+
+        return convert
 
 
 #
@@ -73,3 +90,88 @@ class Number(BaseType):
             return String('-Infinity')
 
         return String(str(self.__value))
+
+
+#
+# String Type (8.4)
+#
+class String(BaseType):
+    def __init__(self, value):
+        self.__value = value
+
+    def toBoolean(self):
+        if len(self.value()) > 0:
+            return Boolean('true')
+        else:
+            return Boolean('false')
+
+    def toNumber(self):
+        return Number(self)
+
+    def value(self):
+        return self.__value
+
+    def toString(self):
+        return self
+
+
+#
+# Undefined Type (8.1)
+#
+class Undefined(BaseType):
+    def toBoolean(self):
+        return Boolean('false')
+
+    def toNumber(self):
+        return NaN()
+
+    def toString(self):
+        return String('undefined')
+
+
+#
+# Null Type (8.2)
+#
+class Null(BaseType):
+    def toBoolean(self):
+        return Boolean('false')
+
+    def toNumber(self):
+        return Number(0)
+
+    def toString(self):
+        return String('null')
+
+
+#
+# Represents NaN (not a number) for use with Number type
+#
+class NaN:
+    def toString(self):
+        return String('NaN')
+
+
+#
+# Boolean Type (8.3)
+#
+class Boolean(BaseType):
+    def __init__(self, value):
+        self.__value = value
+
+    def toBoolean(self):
+        return self
+
+    def toNumber(self):
+        if (self.value()):
+            return Number(1)
+
+        return Number(0)
+
+    def value(self):
+        if self.__value == 'true':
+            return True
+
+        return False
+
+    def toString(self):
+        return String(self.__value)
